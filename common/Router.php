@@ -59,6 +59,11 @@ class Router
         $route = new Route($path, $callable);
         $this->routes[$method][] = $route;
 
+        if(is_string($callable) && $name === null)
+        {
+            $name = $callable;
+        }
+        
         if ($name)
         {
             $this->namedRoutes[$name] = $route;
@@ -81,5 +86,14 @@ class Router
             }
         }
         throw new RouterException('No matching routes');
+    }
+
+    public function url($name, $params = [])
+    {
+        if(!isset($this->namedRoutes[$name]))
+        {
+            throw new RouterException('No route matches this name');
+        }
+        return $this->namedRoutes[$name]->getUrl($params);
     }
 }

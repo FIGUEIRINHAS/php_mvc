@@ -1,8 +1,6 @@
 {
-    "driver":"",
-    "host":"",
-    "port":"",
-    "dbname":"",
-    "username":"",
-    "password":""
+    "host":"localhost",
+    "dbname":"phpmvcframework",
+    "username":"root",
+    "password":"root"
 }

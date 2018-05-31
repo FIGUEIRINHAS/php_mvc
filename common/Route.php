@@ -41,13 +41,32 @@ class Route
         {
             return '(' . $this->params[$match[1]] . ')';
         }
-        //var_dump($match);
         return '([^/]+)';
     }
 
     public function call()
     {
-        var_dump($this->matches);
-        return call_user_func_array($this->callable, $this->matches);
+        if(is_string($this->callable))
+        {
+            $params = explode('#', $this->callable);
+            $controller = $params[0] . "Controller";
+            $controller = new $controller();
+            return call_user_func_array([$controller, $params[1]], $this->matches);
+        } 
+        else 
+        {
+            return call_user_func_array($this->callable, $this->matches);
+        }
+    }
+
+    public function getUrl($params)
+    {
+        $path = $this->path;
+
+        foreach($params as $k => $v)
+        {
+            $path = str_replace(":$k", $v, $path);
+        }
+        return $path;
     }
 }

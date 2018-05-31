@@ -7,6 +7,8 @@
                 include'./entity/'.$class.'.php';
             elseif(file_exists('./controller/'.$class.'.php')):
                 include'./controller/'.$class.'.php';
+            elseif(file_exists('./dao/'.$class.'.php')):
+                include'./dao/'.$class.'.php';
             endif;
-            echo 'CLASS : '; var_dump($class); echo '</br>';
+            //echo 'CLASS : '; var_dump($class); echo '</br>';
         });

@@ -1,8 +1,5 @@
 <?php
 
-include('controller/controller.php');
-include('controller/user_controller.php');
-
 class Kernel
 {
     private static $_Instance = null;
@@ -25,11 +22,11 @@ class Kernel
     {
         $router = new Router($_SERVER['REQUEST_URI']);
 
-        $router->get('/', function(){ echo 'Acceuil'; });
+        $router->get('/', function(){ });
         $router->get('/posts', function(){ echo 'Tous les posts'; });
         $router->get('/posts/:id', function($id){ echo 'Le post ' . $id; });
         $router->post('/posts/:id', function($id){ echo 'Poster pour l\'article'; });
-        $router->get('/users', function() {echo 'Users';});
+        $router->get('/users', "User#getAllUser");
 
         $router->run();
     }
