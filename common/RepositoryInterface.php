@@ -8,5 +8,5 @@ interface RepositoryInterface
 
     public function getAll($array);
 
-    public function getAllById($associatif_array);
+    public function getAllBy($associatif_array);
 }

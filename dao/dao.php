@@ -5,13 +5,10 @@ class DAO implements CRUDInterface, RepositoryInterface
     protected $pdo;
     protected $table;
 
-    public function __construct($pdo, $table)
+    public function __construct($pdo)
     {
         $this->pdo = $pdo;
-        $this->table = $table;
-
-        $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-        $pdo = new PDO('myqsl:host=localhost; dbname=php_mvc_framework', 'root', 'root');
+        $pdo = PDO::connect();
     }
 
     public function create()
@@ -36,9 +33,13 @@ class DAO implements CRUDInterface, RepositoryInterface
 
     public function getAll($table)
     {
+        $list = [];
         $db = $this->pdo;
+
         $req = $db->prepare('SELECT * FROM ' . $table . '');
-        $req->fetchAll() as $table  
+        $list[] = $req->fetchAll() as $table  
+
+        return $list;
     }
 
     public function getAllById()
